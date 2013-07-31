@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/RallySoftware-cookbooks/maven-rally.png?branch=master)](https://travis-ci.org/RallySoftware-cookbooks/maven-rally)
-
 Description
 ===========
 Installs and configures maven.
