@@ -1,16 +1,12 @@
-Description
-===========
+## Description
 Installs and configures maven.
 
-Requirements
-============
+## Requirements
+### Platform
+* Centos 6.4
+* Ubuntu 12.4
 
-Platform
---------
-Tested on CentOS 6.4 and Ubuntu 12.04.
-
-Attributes
-==========
+## Attributes
 See `attributes/default.rb` for default values
 
 * `node[:maven][:version]` - Specifies the version of maven to install.
@@ -25,17 +21,11 @@ See `attributes/default.rb` for default values
 * `node[:maven][:symlink_path]` = Path of symlink
 * `node[:maven][:source_url]` = Specifies full URL to download archive
 
-Recipes
-=======
-
-default
--------
-
+## Recipes
+### default
 Installs and configures maven.
 
-License
-=======
-
+## License
 Copyright (c) Rally Software Development Corp. 2013
 
 Distributed under the MIT License.
