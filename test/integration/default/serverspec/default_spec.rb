@@ -16,3 +16,8 @@ end
 describe file('/usr/local/maven') do
   it { should be_linked_to '/usr/local/apache-maven-3.0.5'}
 end
+
+describe file('/usr/local/bin/mvn') do
+  it { should be_file }
+  it { should be_linked_to '/usr/local/maven/bin/mvn' }
+end

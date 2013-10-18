@@ -44,3 +44,7 @@ end
 link node[:maven][:symlink_path] do
   to node[:maven][:install_path]
 end
+
+link "/usr/local/bin/mvn" do
+  to "#{node[:maven][:symlink_path]}/bin/mvn"
+end
