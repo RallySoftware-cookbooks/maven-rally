@@ -1,26 +1,21 @@
 require_relative 'spec_helper'
 
 describe 'maven-rally::default' do
-
-  def init_chef_run
-    chef_run = ChefSpec::ChefRunner.new
-    chef_run.node.set[:maven][:version] = '3.0.5'
-    chef_run.node.set[:maven][:path] = '/usr/local'
-    chef_run.node.set[:maven][:owner] = 'root'
-    chef_run.node.set[:maven][:group] = 'root'
-    chef_run.node.set[:maven][:mode] = '755'
-    chef_run.converge 'maven-rally::default'
-    chef_run
+  let(:version) { 'foo' }
+  let(:install_dir) { '/usr/local' }
+  let(:tar_gz) { "apache-maven-#{version}-bin.tar.gz" }
+  let(:tar_gz_path) { "#{install_dir}/#{tar_gz}" }
+  subject(:chef_run) do
+    stub_command("test -f #{tar_gz_path}").and_return(true)
+    ChefSpec::Runner.new do |node|
+      node.set[:maven][:version] = version
+    end.converge described_recipe
   end
 
-  it 'uses remote_file to download the maven targz' do
-    chef_run = init_chef_run
-    expect(chef_run).to create_remote_file '/usr/local/apache-maven-3.0.5-bin.tar.gz'
-  end
+  it { should create_remote_file(tar_gz_path) }
 
-  it 'will execute tar command if file exists' do
-    chef_run = init_chef_run
-    expect(chef_run).to execute_command('tar xzf apache-maven-3.0.5-bin.tar.gz')
-  end
+  it { should run_execute("tar xzf #{tar_gz}").with(cwd: install_dir) }
+
+
 
 end
